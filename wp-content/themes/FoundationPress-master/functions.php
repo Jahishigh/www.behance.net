@@ -49,3 +49,18 @@ require_once( 'library/responsive-images.php' );
 
 /** If your site requires protocol relative url's for theme assets, uncomment the line below */
 // require_once( 'library/protocol-relative-theme-assets.php' );
+
+if ( function_exists( 'add_image_size' ) ) {
+	add_image_size( 'visuel-listing', 450, 450, true ); /* Taille perso pour gallerie */
+}
+
+add_filter('image_size_names_choose', 'add_custom_thumb');
+function add_custom_thumb($sizes) {
+ $addsizes = array(
+        "visuel-listing" => __( "Vignette")
+    );
+ $newsizes = array_merge($sizes, $addsizes);
+ return $newsizes;
+}
+
+set_post_thumbnail_size(450, 450, true);
